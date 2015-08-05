@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RRZE-Shortcodes
  * Description: Shortcodes.
- * Version: 1.0
+ * Version: 1.0.1
  * Author: RRZE-Webteam
  * Author URI: http://blogs.fau.de/webworking/
  * License: GPLv2 or later
@@ -111,7 +111,7 @@ class RRZE_Shortcodes {
         );       
         return $options;
     }
-
+    
     public static function add_post_new_help_tab() {
     $screen = get_current_screen();
     $standard = __('Standardwert %s', self::textdomain);
@@ -155,9 +155,12 @@ class RRZE_Shortcodes {
         'content' => implode(PHP_EOL, $content_shortcodes),
         );
     
+        if ( $screen->id != 'page' && $screen->id != 'post' )  {
+            return;
+        } 
    
-   $screen->add_help_tab( $help_tab_shortcodes );   
-   
+        $screen->add_help_tab( $help_tab_shortcodes );      
+  
    }    
     
     public static function rss( $atts ) {
